@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:include src="templates/head.xhtml"/>
+<h:body>
+    <div class="container-fluid">
+        <ui:include src="templates/user-navbar.xhtml"/>
+        <main>
+            <hr class="my-3"/>
+            <div class="text-center mb-3">
+                <h4 class="text-info">Welcome, #{session.getAttribute("username")}</h4>
+            </div>
+            <hr class="my-3"/>
+            <div class="container">
+
+                <div class="row mb-4 d-flex justify-content-around">
+                    <ui:repeat value="#{jobsAllListBean.jobs}" var="job" varStatus="index">
+                        <div class="col-md-3 d-flex flex-column text-center">
+                            <h:graphicImage library="img" name="#{job.sector}.jpg" styleClass="img-thumbnail"
+                                            width="300" height="300"/>
+                            <h5 class="text-center">#{job.profession}</h5>
+                            <h:link outcome="job-details?id=#{job.id}" styleClass="btn btn-info" value="Details"/>
+                            <h:link outcome="delete-job?id=#{job.id}" styleClass="btn btn-danger" value="Delete"/>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </div>
+            <hr class="my-3"/>
+        </main>
+        <ui:include src="templates/footer.xhtml"/>
+    </div>
+</h:body>
+</html>
